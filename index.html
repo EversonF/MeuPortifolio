@@ -60,15 +60,34 @@
 
     <section id="contact.html" class="contact">
         <h2 class="contact-title">Contact me</h2>
-        <form class="contact-form" id="form">
+        <form class="contact-form" id="form" onsubmit="enviarWhatsapp(event)">
             <div class="group-form">
-                <input placeholder="Name" class="camp-form">
+                <input placeholder="Name" class="camp-form" id="name">
             </div>
             <div class="group-form">
-            <textarea class="camp-form" placeholder="Message"></textarea>
+            <textarea class="camp-form" placeholder="Message" rows="6" id="message"></textarea>
             </div>
             <button type="submit" class="button-form">Send WhatsApp</button>
         </form>
     </section>
+    
+    <script>
+        function enviarWhatsapp(event){
+            event.preventDefault();
+            const name = document.getElementById('name');
+            const messagem = document.getElementById('message');
+            const telefone = '5531973148194';
+
+            const texto = `Olá, Meu nome é ${name.value}, ${messagem.value}`;
+            const msgFormatada =encodeURIComponent(texto);
+
+            const url = `https://api.whatsapp.com/send?phone=${telefone}&text=${msgFormatada}`;
+
+            window.open(url, '_blank');
+        }
+
+
+    </script>
+
 </body>
 </html>
